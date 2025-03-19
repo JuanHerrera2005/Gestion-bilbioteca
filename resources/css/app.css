@@ -1,0 +1,69 @@
+/* Animaciones de entrada  */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideInLeft 1s ease-in-out forwards;
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideInRight 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Botones con efecto de resplandor */
+.btn-animated {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-animated:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+/* Navbar dinámica */
+.navbar {
+    transition: background 0.4s;
+}
+
+.scrolled {
+    background: rgba(17, 24, 39, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+/* Hover en módulos */
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
