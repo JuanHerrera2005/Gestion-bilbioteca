@@ -1,6 +1,6 @@
 # Sistema de Gestión de Biblioteca
 
-![Imagen de la Base de Datos](https://i.imgur.com/8smULh2_d.webp.jpg)
+![Imagen de la Base de Datos](https://i.imgur.com/8smULh2_d.webp?maxwidth=760&fidelity=grand.jpg)
 
 ## Descripción
 El Sistema de Gestión para una Biblioteca  es una aplicación diseñada para optimizar la administración de bibliotecas comunitarias, municipales o independientes. Su principal objetivo es facilitar la gestión eficiente del inventario de libros, la administración de usuarios y los procesos de préstamo y devolución, asegurando un acceso organizado y ágil a los recursosbibliográficos.
