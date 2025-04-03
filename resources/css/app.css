@@ -67,3 +67,47 @@
     transform: scale(1.03);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
+
+
+
+/* Estilos para mejorar la calidad de imágenes */
+.imagen-libro {
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering: -o-crisp-edges;           /* Opera */
+    image-rendering: -webkit-optimize-contrast;/* WebKit (Safari) */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;                /* Fallback moderno */
+    -ms-interpolation-mode: nearest-neighbor;  /* IE (antiguo) */
+    
+    /* Suavizado controlado */
+    filter: blur(0.5px);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Contenedor para mantener relación de aspecto */
+.contenedor-imagen {
+    position: relative;
+    width: 100%;
+    padding-bottom: 150%; /* Relación 2:3 para portadas de libros */
+    overflow: hidden;
+    background-color: #1f2937; /* Fondo similar al placeholder */
+}
+
+/* Ajustes para la imagen dentro del contenedor */
+.contenedor-imagen img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto hover sutil */
+.contenedor-imagen:hover img {
+    transform: scale(1.02);
+    filter: blur(0);
+}

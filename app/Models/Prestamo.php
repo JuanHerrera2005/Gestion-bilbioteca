@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Prestamo extends Model
+{
+    protected $table = 'prestamos';
+    protected $primaryKey = 'prestamo_id';
+    protected $fillable = [
+        'usuario_id', 'ejemplar_id', 'fecha_prestamo', 'fecha_devolucion',
+        'estado', 'observaciones', 'metodo_entrega', 'multa_aplicada'
+    ];
+    
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'usuario_id');
+    }
+    
+    public function ejemplar()
+    {
+        return $this->belongsTo(Ejemplar::class, 'ejemplar_id');
+    }
+}
