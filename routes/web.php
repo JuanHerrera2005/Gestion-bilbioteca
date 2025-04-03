@@ -33,12 +33,15 @@ Route::prefix('busqueda')->group(function () {
 // Libros
 Route::resource('libros', LibroController::class);
 
-// Usuarios
-Route::resource('usuarios', UsuarioController::class);
-Route::get('/usuarios/{usuario}/historial', [UsuarioController::class, 'historial'])
-    ->name('usuarios.historial')
-    ->where('usuario', '[0-9]+');
 
+Route::resource('usuarios', UsuarioController::class)->parameters([
+    'usuarios' => 'usuario'
+]);
+
+// Opción 2: Definir rutas manualmente
+Route::get('usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::put('usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::delete('usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
 
 
 
@@ -57,3 +60,8 @@ Route::resource('libros', LibroController::class)->parameters([
     'libros' => 'libro:libro_id'
 ]);
 Route::get('/libros/{libro}', [LibroController::class, 'show'])->name('libros.show');
+
+Route::prefix('busqueda')->group(function () {
+    Route::get('/', [BusquedaController::class, 'mostrarFormulario'])->name('busqueda.index');
+    Route::get('/resultados', [BusquedaController::class, 'buscar'])->name('busqueda.resultados');
+});

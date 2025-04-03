@@ -8,11 +8,12 @@ class Usuario extends Model
 {
     protected $table = 'usuarios';
     protected $primaryKey = 'usuario_id';
+    public $timestamps = false;
     protected $fillable = [
         'nombre', 'apellido_paterno', 'apellido_materno', 'tipo_documento',
         'numero_documento', 'email', 'contrasena', 'telefono', 'direccion',
         'fecha_nacimiento', 'genero', 'ocupacion', 'estado_civil',
-        'nacionalidad', 'nivel_educativo','estado_auditoria'
+        'nacionalidad', 'nivel_educativo', 'estado_auditoria'
     ];
     
     protected $hidden = ['contrasena'];
@@ -31,11 +32,11 @@ class Usuario extends Model
         'estado_auditoria' => '1' // Valor por defecto
     ];
 
-        // Scope para filtrar usuarios activos
-        public function scopeActivos($query)
-        {
-            return $query->where('estado_auditoria', '1');
-        }
+    // Scope para filtrar usuarios activos
+    public function scopeActivos($query)
+    {
+        return $query->where('estado_auditoria', '1');
+    }
 
 
 }
