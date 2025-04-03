@@ -12,7 +12,7 @@ class Usuario extends Model
         'nombre', 'apellido_paterno', 'apellido_materno', 'tipo_documento',
         'numero_documento', 'email', 'contrasena', 'telefono', 'direccion',
         'fecha_nacimiento', 'genero', 'ocupacion', 'estado_civil',
-        'nacionalidad', 'nivel_educativo'
+        'nacionalidad', 'nivel_educativo','estado_auditoria'
     ];
     
     protected $hidden = ['contrasena'];
@@ -26,4 +26,16 @@ class Usuario extends Model
     {
         return $this->hasMany(Sancion::class, 'usuario_id');
     }
+
+    protected $attributes = [
+        'estado_auditoria' => '1' // Valor por defecto
+    ];
+
+        // Scope para filtrar usuarios activos
+        public function scopeActivos($query)
+        {
+            return $query->where('estado_auditoria', '1');
+        }
+
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Libro extends Model
 {
+    public $timestamps = false;
     protected $table = 'libros';
     protected $primaryKey = 'libro_id';
     protected $fillable = [

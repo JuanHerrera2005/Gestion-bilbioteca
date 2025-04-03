@@ -56,3 +56,4 @@ Route::resource('libros', LibroController::class)->parameters([
 Route::resource('libros', LibroController::class)->parameters([
     'libros' => 'libro:libro_id'
 ]);
+Route::get('/libros/{libro}', [LibroController::class, 'show'])->name('libros.show');
