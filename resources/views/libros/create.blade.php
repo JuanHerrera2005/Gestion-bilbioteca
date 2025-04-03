@@ -12,9 +12,11 @@
     <div class="bg-white rounded-lg shadow p-6">
         @include('libros.form', [
             'action' => route('libros.store'),
+            'method' => 'POST',
             'autores' => $autores,
-            'editoriales' => $editoriales,
-            'generos' => $generos
+            'editoriales' => $editoriales, 
+            'generos' => $generos,
+            'libro' => null
         ])
     </div>
 </div>
