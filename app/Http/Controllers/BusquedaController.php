@@ -15,11 +15,10 @@ class BusquedaController extends Controller
         $generos = Genero::orderBy('nombre')->get();
         $editoriales = Editorial::orderBy('nombre')->get();
         
-        // Si está en tu vista principal (index)
+        
         return view('index', compact('generos', 'editoriales'));
         
-        // O si prefieres una ruta específica para el formulario:
-        // return view('busqueda.index', compact('generos', 'editoriales'));
+      
     }
 
     public function buscar(Request $request)

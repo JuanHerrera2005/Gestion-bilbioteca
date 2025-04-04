@@ -33,7 +33,7 @@ class UsuarioController extends Controller
     {
         $validated = $this->validateRequest($request);
         
-        // Encriptar contraseña solo si se proporciona
+       
         if (!empty($validated['contrasena'])) {
             $validated['contrasena'] = bcrypt($validated['contrasena']);
         }
@@ -70,7 +70,7 @@ class UsuarioController extends Controller
     {
         $validated = $this->validateRequest($request, $usuario);
         
-        // Solo actualizar contraseña si se proporcionó una nueva
+    
         if (empty($validated['contrasena'])) {
             unset($validated['contrasena']);
         } else {
@@ -84,9 +84,7 @@ class UsuarioController extends Controller
                 ->with('success', 'Usuario actualizado exitosamente');
     }
 
-    /**
-     * Muestra el historial completo del usuario
-     */
+
     public function historial(Usuario $usuario)
     {
         $prestamos = $usuario->prestamos()
