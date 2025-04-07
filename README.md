@@ -16,7 +16,7 @@ El Sistema de Gestión para una Biblioteca  es una aplicación diseñada para op
 **Taller de Programación Web**
 
 ## Docente
-**Diego Fernando Baez Vasquez**
+**Diego Fernando Baes Vasquez**
 
 ## Tema
 **Sistema de Gestión de Biblioteca**
