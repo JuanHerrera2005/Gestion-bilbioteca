@@ -20,6 +20,9 @@ class Prestamo extends Model
     
     public function ejemplar()
     {
-        return $this->belongsTo(Ejemplar::class, 'ejemplar_id');
+        return $this->belongsTo(Ejemplar::class, 'ejemplar_id'); // Asegúrate de que 'ejemplar_id' sea el nombre correcto de la columna
     }
+
+    // Desactivar el manejo automático de created_at y updated_at
+    public $timestamps = false;
 }

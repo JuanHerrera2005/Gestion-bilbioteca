@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\BusquedaController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PrestamoController;
 
 // Ruta para archivos CSS estáticos
 Route::get('/css/{file}', function ($file) {
@@ -20,6 +21,10 @@ Route::get('/css/{file}', function ($file) {
 Route::get('/', function () {
     return view('login');
 })->name('login');
+
+// Ruta para Login
+Route::get('/login', [UsuarioController::class, 'loginForm'])->name('login.form');
+Route::post('/login', [UsuarioController::class, 'login'])->name('login');
 
 // Ruta principal del sistema
 Route::get('/index', [IndexController::class, 'index'])->name('index.index');
@@ -65,3 +70,12 @@ Route::prefix('busqueda')->group(function () {
     Route::get('/', [BusquedaController::class, 'mostrarFormulario'])->name('busqueda.index');
     Route::get('/resultados', [BusquedaController::class, 'buscar'])->name('busqueda.resultados');
 });
+
+// Rutas CRUD para Préstamos
+Route::get('/prestamos',                     [PrestamoController::class, 'index'])->name('prestamos.index');
+Route::get('/prestamos/create',              [PrestamoController::class, 'create'])->name('prestamos.create');
+Route::post('/prestamos',                    [PrestamoController::class, 'store'])->name('prestamos.store');
+Route::get('/prestamos/{prestamo}',          [PrestamoController::class, 'show'])->name('prestamos.show');
+Route::get('/prestamos/{prestamo}/edit',     [PrestamoController::class, 'edit'])->name('prestamos.edit');
+Route::put('/prestamos/{prestamo}',          [PrestamoController::class, 'update'])->name('prestamos.update');
+Route::delete('/prestamos/{prestamo}',       [PrestamoController::class, 'destroy'])->name('prestamos.destroy');

@@ -15,7 +15,7 @@ class Ejemplar extends Model
     
     public function libro()
     {
-        return $this->belongsTo(Libro::class, 'libro_id');
+        return $this->belongsTo(Libro::class, 'libro_id'); // Asegúrate de que 'libro_id' sea el nombre correcto de la columna
     }
     
     public function prestamos()

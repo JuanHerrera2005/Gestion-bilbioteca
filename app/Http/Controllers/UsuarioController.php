@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
-use App\Models\Prestamo;
-use App\Models\Sancion;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -14,30 +14,54 @@ class UsuarioController extends Controller
         $usuarios = Usuario::activos()
                     ->withCount(['prestamos', 'sanciones'])
                     ->paginate(10);
-                    
+
         return view('usuarios.index', compact('usuarios'));
     }
 
-    /**
-     * Muestra el formulario de creación de usuario
-     */
+    public function loginForm()
+    {
+        return view('usuarios.login');
+    }
+
+    public function login(Request $request)
+    {
+        // Validación básica
+        $request->validate([
+            'email' => 'required|email',
+            'contrasena' => 'required',
+        ]);
+
+        // Buscar usuario por email
+        $usuario = Usuario::where('email', $request->email)->first();
+
+        // Verificar si existe y la contraseña es correcta
+        if ($usuario && Hash::check($request->contrasena, $usuario->contrasena)) {
+            // Iniciar sesión manualmente
+            Auth::login($usuario);
+
+            // Redirigir al inicio u otra ruta protegida
+            return redirect()->intended('/');
+        } else {
+            // Volver al login con mensaje de error
+            return back()->withErrors([
+                'email' => 'Correo o contraseña incorrectos',
+            ])->withInput($request->only('email'));
+        }
+    }
+
     public function create()
     {
         return view('usuarios.create');
     }
 
-    /**
-     * Almacena un nuevo usuario en la base de datos
-     */
     public function store(Request $request)
     {
         $validated = $this->validateRequest($request);
-        
-       
+
         if (!empty($validated['contrasena'])) {
             $validated['contrasena'] = bcrypt($validated['contrasena']);
         }
-        
+
         Usuario::create($validated);
 
         return redirect()
@@ -45,38 +69,27 @@ class UsuarioController extends Controller
                 ->with('success', 'Usuario registrado exitosamente');
     }
 
-    /**
-     * Muestra los detalles de un usuario específico
-     */
     public function show(Usuario $usuario)
     {
         $usuario->load(['prestamos.ejemplar.libro', 'sanciones']);
-        
         return view('usuarios.show', compact('usuario'));
     }
 
-    /**
-     * Muestra el formulario para editar un usuario
-     */
     public function edit(Usuario $usuario)
     {
         return view('usuarios.edit', compact('usuario'));
     }
 
-    /**
-     * Actualiza un usuario en la base de datos
-     */
     public function update(Request $request, Usuario $usuario)
     {
         $validated = $this->validateRequest($request, $usuario);
-        
-    
+
         if (empty($validated['contrasena'])) {
             unset($validated['contrasena']);
         } else {
             $validated['contrasena'] = bcrypt($validated['contrasena']);
         }
-        
+
         $usuario->update($validated);
 
         return redirect()
@@ -84,14 +97,13 @@ class UsuarioController extends Controller
                 ->with('success', 'Usuario actualizado exitosamente');
     }
 
-
     public function historial(Usuario $usuario)
     {
         $prestamos = $usuario->prestamos()
                         ->with('ejemplar.libro')
                         ->orderBy('fecha_prestamo', 'desc')
                         ->paginate(10, ['*'], 'prestamos');
-                        
+
         $sanciones = $usuario->sanciones()
                         ->orderBy('fecha_inicio', 'desc')
                         ->paginate(10, ['*'], 'sanciones');
@@ -99,33 +111,24 @@ class UsuarioController extends Controller
         return view('usuarios.historial', compact('usuario', 'prestamos', 'sanciones'));
     }
 
-    /**
-     * Realiza una eliminación lógica (desactiva el usuario)
-     */
     public function destroy(Usuario $usuario)
     {
         $usuario->update(['estado_auditoria' => '0']);
-        
+
         return redirect()
                 ->route('usuarios.index')
                 ->with('success', 'Usuario desactivado exitosamente');
     }
 
-    /**
-     * Restaura un usuario desactivado
-     */
     public function restore($id)
     {
         $usuario = Usuario::withTrashed()->findOrFail($id);
         $usuario->update(['estado_auditoria' => '1']);
-        
+
         return back()
                 ->with('success', 'Usuario reactivado exitosamente');
     }
 
-    /**
-     * Valida los datos del request para usuarios
-     */
     protected function validateRequest(Request $request, Usuario $usuario = null)
     {
         return $request->validate([
@@ -159,13 +162,6 @@ class UsuarioController extends Controller
             'estado_civil' => 'nullable|string|max:50',
             'nacionalidad' => 'nullable|string|max:100',
             'nivel_educativo' => 'nullable|string|max:100'
-       
         ]);
-
     }
-
-
-
-
-
 }

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     protected $table = 'usuarios';
     protected $primaryKey = 'usuario_id';
     public $timestamps = false;
+
     protected $fillable = [
         'nombre', 'apellido_paterno', 'apellido_materno', 'tipo_documento',
         'numero_documento', 'email', 'contrasena', 'telefono', 'direccion',
@@ -17,7 +18,11 @@ class Usuario extends Model
     ];
     
     protected $hidden = ['contrasena'];
-    
+
+    protected $attributes = [
+        'estado_auditoria' => '1'
+    ];
+
     public function prestamos()
     {
         return $this->hasMany(Prestamo::class, 'usuario_id');
@@ -28,15 +33,13 @@ class Usuario extends Model
         return $this->hasMany(Sancion::class, 'usuario_id');
     }
 
-    protected $attributes = [
-        'estado_auditoria' => '1' // Valor por defecto
-    ];
-
-    // Scope para filtrar usuarios activos
     public function scopeActivos($query)
     {
         return $query->where('estado_auditoria', '1');
     }
 
-
+    public function getAuthPassword()
+    {
+        return $this->contrasena;
+    }
 }

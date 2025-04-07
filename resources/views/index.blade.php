@@ -11,5 +11,5 @@
     @include('partials.busqueda')
     @include('partials.gestion-libros')
     @include('partials.gestion-usuarios')
-   
+    @include('partials.gestion-prestamos') <!-- Aquí incluimos el módulo de préstamos -->
 @endsection
