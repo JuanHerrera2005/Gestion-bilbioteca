@@ -6,17 +6,19 @@
 El Sistema de Gestión para una Biblioteca  es una aplicación diseñada para optimizar la administración de bibliotecas comunitarias, municipales o independientes. Su principal objetivo es facilitar la gestión eficiente del inventario de libros, la administración de usuarios y los procesos de préstamo y devolución, asegurando un acceso organizado y ágil a los recursosbibliográficos.
 
 ## Las principales características del sistema incluyen:
-- Registro y actualización de libros con información detallada.
-- Administración de usuarios y control de historial de préstamos.
-- Gestión de préstamos y devoluciones con fechas y notificaciones.
-- Búsqueda avanzada de libros por título, autor o género.
-- Interfaz intuitiva y fácil de usar para bibliotecarios y usuarios.
+- Registro y edicion de usuario
+- ver detalles y eliminacion logica de usuario
+- Registro y edicion de Libro
+- ver detalles y eliminacion logica de libro
+- Búsqueda avanzada de libros por título, autor , género etc.
+- Login
+- Gestion de prestamo
 
 ## Curso
 **Taller de Programación Web**
 
 ## Docente
-**Diego Fernando Baes Vasquez**
+**Diego Fernando Baez Vasquez**
 
 ## Tema
 **Sistema de Gestión de Biblioteca**
