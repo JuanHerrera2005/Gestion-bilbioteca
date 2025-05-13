@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Usuario extends Model
 {
     protected $table = 'usuarios';
@@ -16,7 +17,7 @@ class Usuario extends Model
         'nacionalidad', 'nivel_educativo', 'estado_auditoria'
     ];
     
-    protected $hidden = ['contrasena'];
+    protected $hidden = ['contrasena' ,'remember_token'];
     
     public function prestamos()
     {
@@ -37,6 +38,9 @@ class Usuario extends Model
     {
         return $query->where('estado_auditoria', '1');
     }
-
+    public function getAuthPassword()
+    {
+        return $this->contrasena;
+    }
 
 }

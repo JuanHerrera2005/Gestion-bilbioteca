@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\BusquedaController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AuthController;
 
 // Ruta para archivos CSS estáticos
 Route::get('/css/{file}', function ($file) {
@@ -17,7 +18,7 @@ Route::get('/css/{file}', function ($file) {
 });
 
 // Ruta de autenticación
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('login');
 })->name('login');
 
@@ -65,3 +66,8 @@ Route::prefix('busqueda')->group(function () {
     Route::get('/', [BusquedaController::class, 'mostrarFormulario'])->name('busqueda.index');
     Route::get('/resultados', [BusquedaController::class, 'buscar'])->name('busqueda.resultados');
 });
+
+
+
+
+

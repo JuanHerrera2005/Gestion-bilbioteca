@@ -6,9 +6,8 @@
         <ul class="hidden md:flex space-x-6 text-lg">
             <li><a href="{{ url('/') }}" class="hover:text-purple-400 transition duration-300">Inicio</a></li>
             <li><a href="#busqueda" class="hover:text-purple-400 transition duration-300">Búsqueda</a></li>
-            <li><a href="{{ url('/ConsultarLibro') }}" class="hover:text-purple-400 transition duration-300">Lista Libros</a></li>
-            <li><a href="{{ url('/ConsultarUsuario') }}" class="hover:text-purple-400 transition duration-300">Lista Usuarios</a></li>
-            <li><a href="{{ url('/Loggin') }}" class="hover:text-purple-400 transition duration-300">Iniciar Sesión</a></li>
-        </ul>
+            <li><a href="{{ url('/libros') }}" class="hover:text-purple-400 transition duration-300">Lista Libros</a></li>
+            <li><a href="{{ url('/usuarios') }}" class="hover:text-purple-400 transition duration-300">Lista Usuarios</a></li>
+            <li><a href="{{ url('/login') }}" class="hover:text-purple-400 transition duration-300">Iniciar Sesión</a></li>        </ul>
     </div>
 </nav>

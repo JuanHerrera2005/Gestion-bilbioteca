@@ -18,4 +18,8 @@ class Autor extends Model
     {
         return $this->hasMany(Libro::class, 'autor_id');
     }
+
+
+
+    
 }
